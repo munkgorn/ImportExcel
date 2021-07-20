@@ -9,11 +9,15 @@ const ResultPrint = () => {
         window.print()
     }
 
+    const clearData = () => {
+        localStorage.removeItem('address');
+        setAddress('');
+    }
+
     return (
-        <Card title="Results" id="print_template" extra={<Button type="button" onClick={printPage}>Print</Button>} style={{ width: '100%' }}>
+        <Card title="Results" id="print_template" extra={<div><Button type="button" onClick={printPage}>Print</Button><Button type="button" onClick={clearData}>Clear</Button></div>} style={{ width: '100%' }}>
             <Row>
-                
-                {address.map((v,i) => (<Col span={8} style={{textAlign:'left',border:'1px solid #ccc',padding:'5px'}} key={i}>
+                {address && address.map((v,i) => (<Col span={8} style={{textAlign:'left',border:'1px solid #ccc',padding:'5px'}} key={i}>
                     <p>
                         ผู้ส่ง JIANG HAO<br />
                         41/1 ซอย เอกชัย 83/1   แขวงบางบอน  เขต บางบอน กรุงเทพฯ 10150<br />
