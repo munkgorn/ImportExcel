@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
 const readExcel = (obj) => {
     let removeChiness = str => {
         var reg = /[\u4e00-\u9fa5]/g;   
-        return str.replace(reg, ""); 
+        let str1 = str.replace(reg, ""); 
+        return str1.replace(/,/g, '');
     }
     let rows = obj;
     let start = true;
