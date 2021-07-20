@@ -37,7 +37,7 @@ const readExcel = (obj) => {
         var reg = /[\u4e00-\u9fa5]/g;   
         let str1 = str.replace(reg, ""); 
         return str1.replace(/,/g, '');
-    }
+    } 
     let rows = obj;
     let start = true;
     let stop = false;
