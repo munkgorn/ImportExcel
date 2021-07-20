@@ -17,16 +17,20 @@ function App() {
   
   const location = useLocation();
   let menus = [
-    {title: 'Import', path: '/', component: <UploadExcel />},
-    {title: 'Result', path: '/result', component: <Result />}
+    {seq: '1', title: 'Result', path: '/result', component: <Result />},
+    {seq: '0', title: 'Import', path: '/', component: <UploadExcel />}
   ];
+  React.useEffect(()=>{
+    console.log(menus.find(f => f.path === location.pathname).seq.toString())
+    console.log(_.orderBy(menus, ['seq'], ['asc']));
+  },[location,menus]);
 
   return (
     <div className="App">
         <Layout>
           <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[_.findIndex(menus, f => f.path === location.pathname).toString()]}>
-              {menus && menus.map((v,i) => (
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[`${menus.find(f => f.path === location.pathname).seq.toString()}`]}>
+              {menus && _.orderBy(menus, ['seq'], ['asc']).map((v,i) => (
                 <Menu.Item key={i}><Link to={v.path}>{v.title}</Link></Menu.Item>
               ))}
             </Menu>
@@ -35,7 +39,7 @@ function App() {
             <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
               
                 <Switch>
-                  {menus && menus.map((v,i) => (<Route path={v.path}>{v.component}</Route>))}
+                  {menus && _.orderBy(menus, ['seq'], ['desc']).map((v,i) => (<Route path={v.path}>{v.component}</Route>))}
                 </Switch>
                 
             </div>
