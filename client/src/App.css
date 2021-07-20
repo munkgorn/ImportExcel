@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+@media all {
+  .pagebreak {
+    display: none;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+  }
+}
+@media print {
+  html,
+  body {
+    height: initial !important;
+    overflow: initial !important;
+    background-color: white !important;
+    -webkit-print-color-adjust: exact;
+  }
+  .ant-layout-header,
+  .ant-card-head {
+    display: none !important;
+  }
+  .ant-layout-content {padding:0 !important;margin:0 !important;}
+  .ant-card-bordered { border:0 !important;}
+  .ant-col { word-break: break-all !important; page-break-after: avoid !important; }
+}
+@page {
+  size: auto;
+  margin: 15mm 10mm;
+}
