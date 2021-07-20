@@ -33,12 +33,16 @@ app.get('/', (req, res) => {
 
 
 const readExcel = (obj) => {
+    let removeChiness = str => {
+        var reg = /[\u4e00-\u9fa5]/g;   
+        return str.replace(reg, ""); 
+    }
     let rows = obj;
     let start = true;
     let stop = false;
     let items = rows
         .filter((f,i) => i>0)
-        .map((v,r) => ({code:v[0], address:v[4]}));
+        .map((v,r) => ({code:removeChiness(v[0]), address: removeChiness(v[4])}));
     return items;
 }
 
